@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
         <!-- Custom styles for this temmplate -->
         <link href="css/blog-post.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/ea191b945b.js" crossorigin="anonymous"></script>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -86,6 +87,22 @@
                         {% endif %}
                         <!-- Post content-->
                         <p>{{ post.content }}</p>
+                        {% if post.file_upload %}
+                            <a href="{{ post.file_upload.url }}" class="btn btn-primary" role="button"download>
+                                Download:
+                                {% if post.get_file_ext == 'csv' %}
+                                <i class="fas fa-file-csv"></i>
+                                {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                                <i class="fas fa-file-excel"></i>
+                                {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                                <i class="fas fa-file-word"></i>
+                                {% else %}
+                                <i class="far fa-file"></i>
+                                {% endif %}
+                                {{ post.get_file_name }}
+
+                            </a>
+                            {% endif %}
                         <hr>
 <!--                        <section class="mb-5">-->
 <!--                            <p class="fs-5 mb-4">Science is an enterprise that should be cherished as an activity of the free human mind. Because it transforms who we are, how we live, and it gives us an understanding of our place in the universe.</p>-->
